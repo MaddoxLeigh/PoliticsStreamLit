@@ -54,7 +54,7 @@ def createpopagainstincome():
 
 def createUSpovertyovertime():
     USpovdf = pd.read_csv("poverty.csv")
-    line_chart = alt.Chart(df).mark_line().encode(
+    line_chart = alt.Chart(USpovdf).mark_line().encode(
     x='Year:T',
     y=alt.Y('Percent Below Poverty:Q', title='Percent Below Poverty'),
     tooltip=['Year:T', alt.Tooltip('Percent Below Poverty:Q', title='Percent Below Poverty')]
