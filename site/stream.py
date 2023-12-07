@@ -98,14 +98,17 @@ with col1:
 
 with col2:
     st.altair_chart(createpopulationdensitygeo())
+st.markdown("Sources: US gov Census")
 st.markdown("## Median Household income (2019-2021) against population density")
 st.altair_chart(createpopagainstincome())
-st.markdown("Sources: ")
+st.markdown("Sources: US gov census, Wikipedai(land area)")
 st.markdown("# UK data")
 st.markdown("## Crime rates over 2021 between UK cities")
 st.altair_chart(createcrimeratesbetweenUKcities())
+st.markdown("Sources: Data Police UK")
 st.markdown("## Crime by category, London 2022")
 st.altair_chart(createlondoncrimebycategory())
+st.markdown("Sources: Data Police UK")
 
     
 
