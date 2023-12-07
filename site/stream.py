@@ -101,7 +101,7 @@ with col2:
 st.markdown("Sources: US gov Census")
 st.markdown("## Median Household income (2019-2021) against population density")
 st.altair_chart(createpopagainstincome())
-st.markdown("Sources: US gov census, Wikipedai(land area)")
+st.markdown("Sources: US gov census, Wikipedia (land area)")
 st.markdown("# UK data")
 st.markdown("## Crime rates over 2021 between UK cities")
 st.altair_chart(createcrimeratesbetweenUKcities())
