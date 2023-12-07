@@ -52,16 +52,7 @@ def createpopagainstincome():
     combined_chart = (scatter + regressionline)
     return combined_chart.interactive()
 
-def createUSpovertyovertime():
-    USpovdf = pd.read_csv("poverty.csv")
-    line_chart = alt.Chart(USpovdf).mark_line().encode(
-    x='Year:T',
-    y=alt.Y('Percent Below Poverty:Q', title='Percent Below Poverty'),
-    tooltip=['Year:T', alt.Tooltip('Percent Below Poverty:Q', title='Percent Below Poverty')]
-    ).properties(
-        title='Percent Below Poverty in the USA from 2000-2011'
-    )
-    return line_chart
+
 
 def createcrimeratesbetweenUKcities():
     crimeratesdf = pd.read_csv("crimerates2021.csv")
@@ -99,7 +90,6 @@ st.markdown("* Ayşe Yalçın (ayseyalcin1) | BSc in Politics and Data Science")
 st.markdown("* Maddox Leigh (maddoxleigh) | BSc in Politics and Data Science")
 st.write("This project aims to create easy to interpret, interactive graphs showing interesting correlations we found from various government census data and APIs")
 st.write("It is important to note that any correlations shown do not implicitly imply that a causation exists between the two variables!")
-st.altair_chart(createUSpovertyovertime())
 st.markdown("# US data")
 st.markdown("## Population vs Population Density by State")
 col1, col2 = st.columns(2)
