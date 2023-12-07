@@ -95,7 +95,7 @@ st.markdown("## Population vs Population Density by State")
 col1, col2 = st.columns(2)
 with col1:
     st.altair_chart(createpopulationgeo())
-
+st.markdown("&nbsp;")
 with col2:
     st.altair_chart(createpopulationdensitygeo())
 st.markdown("Sources: US gov Census")
