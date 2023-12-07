@@ -4,24 +4,6 @@ import streamlit as st
 import altair as alt
 from vega_datasets import data
 
-def createpopulationbar():
-    jsonlist = requests.get("https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&HISP=2&for=state:*").json()
-    states =[]
-    print(jsonlist[3])
-    populations =[]
-    for list in jsonlist:
-        states.append(list[0])
-        populations.append(list[1])
-    data = {"State":states,"Population":populations
-    }
-    us_population_df=pd.DataFrame(data)
-    us_population_df = us_population_df.iloc[1:]
-    us_population_df["Population"]=pd.to_numeric(us_population_df["Population"])
-    chart = alt.Chart(us_population_df).mark_bar().encode(
-        x="State",
-        y="Population"
-    ).interactive()
-    return chart
 def createpopulationgeo():
     
     us_population_df = pd.read_csv("docs/Population_And_Median_Income")
@@ -70,7 +52,16 @@ def createpopagainstincome():
     combined_chart = (scatter + regressionline)
     return combined_chart.interactive()
 
-
+def createUSpovertyovertime():
+    USpovdf = pd.read_csv("poverty.csv")
+    line_chart = alt.Chart(df).mark_line().encode(
+    x='Year:T',
+    y=alt.Y('Percent Below Poverty:Q', title='Percent Below Poverty'),
+    tooltip=['Year:T', alt.Tooltip('Percent Below Poverty:Q', title='Percent Below Poverty')]
+    ).properties(
+        title='Percent Below Poverty in the USA from 2000-2011'
+    )
+    return line_chart
 
 def createcrimeratesbetweenUKcities():
     crimeratesdf = pd.read_csv("crimerates2021.csv")
@@ -108,6 +99,7 @@ st.markdown("* Ayşe Yalçın (ayseyalcin1) | BSc in Politics and Data Science")
 st.markdown("* Maddox Leigh (maddoxleigh) | BSc in Politics and Data Science")
 st.write("This project aims to create easy to interpret, interactive graphs showing interesting correlations we found from various government census data and APIs")
 st.write("It is important to note that any correlations shown do not implicitly imply that a causation exists between the two variables!")
+st.altair_chart(createUSpovertyovertime())
 st.markdown("# US data")
 st.markdown("## Population vs Population Density by State")
 col1, col2 = st.columns(2)
@@ -118,6 +110,7 @@ with col2:
     st.altair_chart(createpopulationdensitygeo())
 st.markdown("## Median Household income (2019-2021) against population density")
 st.altair_chart(createpopagainstincome())
+st.markdown("Sources: ")
 st.markdown("# UK data")
 st.markdown("## Crime rates over 2021 between UK cities")
 st.altair_chart(createcrimeratesbetweenUKcities())
