@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import streamlit as st
 import altair as alt
+from vega_datasets import data
 
 def createpopulationbar():
     jsonlist = requests.get("https://api.census.gov/data/2019/pep/charagegroups?get=NAME,POP&HISP=2&for=state:*").json()
@@ -22,7 +23,7 @@ def createpopulationbar():
     ).interactive()
     return chart
 def createpopulationgeo():
-    from vega_datasets import data
+    
     us_population_df = pd.read_csv("docs/Population_And_Median_Income")
     states_geo = alt.topo_feature(data.us_10m.url, 'states')
     chart = alt.Chart(states_geo).mark_geoshape().encode(
@@ -40,7 +41,6 @@ def createpopulationgeo():
     )
     return chart
 def createpopulationdensitygeo():
-    from vega_datasets import data
     us_population_df = pd.read_csv("docs/Population_And_Median_Income")
     states_geo = alt.topo_feature(data.us_10m.url, 'states')
     chart = alt.Chart(states_geo).mark_geoshape().encode(
